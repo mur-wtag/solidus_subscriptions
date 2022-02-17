@@ -10,7 +10,7 @@ module SolidusSubscriptions
       attr_writer :success_dispatcher_class
 
       def success_dispatcher_class
-        @success_dispatcher_class ||= ::SolidusSubscriptions::SuccessDispatcher
+        @success_dispatcher_class ||= ::SolidusSubscriptions::Dispatcher::SuccessDispatcher
       end
 
       # This handler is called when an order cant be placed for a group of
@@ -18,22 +18,36 @@ module SolidusSubscriptions
       attr_writer :failure_dispatcher_class
 
       def failure_dispatcher_class
-        @failure_dispatcher_class ||= ::SolidusSubscriptions::FailureDispatcher
+        @failure_dispatcher_class ||= ::SolidusSubscriptions::Dispatcher::FailureDispatcher
       end
 
       # This handler is called when a payment fails on a subscription order
       attr_writer :payment_failed_dispatcher_class
 
       def payment_failed_dispatcher_class
-        @payment_failed_dispatcher_class ||= ::SolidusSubscriptions::PaymentFailedDispatcher
+        @payment_failed_dispatcher_class ||= ::SolidusSubscriptions::Dispatcher::PaymentFailedDispatcher
       end
 
       # This handler is called when installemnts cannot be fulfilled due to lack
       # of stock
-      attr_writer :out_of_stock_dispatcher
+      attr_writer :out_of_stock_dispatcher_class
 
       def out_of_stock_dispatcher_class
-        @out_of_stock_dispatcher_class ||= ::SolidusSubscriptions::OutOfStockDispatcher
+        @out_of_stock_dispatcher_class ||= ::SolidusSubscriptions::Dispatcher::OutOfStockDispatcher
+      end
+
+      # This handler is called when an unexpected error appeared while finalizing the renewal order.
+      attr_writer :admin_dispatcher_class
+
+      def admin_dispatcher_class
+        @admin_dispatcher_class ||= ::SolidusSubscriptions::Dispatcher::AdminDispatcher
+      end
+
+      # This handler is called when a renewal order is initiated
+      attr_writer :order_creator_class
+
+      def order_creator_class
+        @order_creator_class ||= ::SolidusSubscriptions::OrderRenewal::OrderCreator
       end
 
       # The *subscription_email_class* must have the following methods:
