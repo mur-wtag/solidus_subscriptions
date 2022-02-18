@@ -54,6 +54,13 @@ module SolidusSubscriptions
           order: order
         }
       end
+
+      def cancel_order
+        return unless order
+
+        order.touch :completed_at
+        order.cancel
+      end
     end
   end
 end

@@ -5,9 +5,7 @@ module SolidusSubscriptions
   module Dispatcher
     class PaymentFailedDispatcher < Base
       def dispatch
-        order.touch :completed_at
-        order.cancel!
-
+        cancel_order
         installments.each { |i| i.payment_failed!(order) }
         super
       end
