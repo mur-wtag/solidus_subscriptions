@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Spree::LineItem, type: :model do
-  subject { Spree::LineItem.new }
+  subject { described_class.new }
   it { is_expected.to have_many :subscription_line_items }
   it { is_expected.to accept_nested_attributes_for :subscription_line_items }
 end

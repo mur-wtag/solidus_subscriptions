@@ -9,4 +9,3 @@ module SolidusSubscriptions
     ::Spree::Variant.prepend self
   end
 end
-

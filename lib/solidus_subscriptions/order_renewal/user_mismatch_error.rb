@@ -3,6 +3,7 @@ module SolidusSubscriptions
     class UserMismatchError < StandardError
       def initialize(installments)
         @installments = installments
+        super
       end
 
       def to_s

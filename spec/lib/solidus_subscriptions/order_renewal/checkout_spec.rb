@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe SolidusSubscriptions::OrderRenewal::Checkout do
   let(:checkout) { described_class.new(installments) }
   let(:root_order) { create :completed_order_with_pending_payment, user: subscription_user }
@@ -315,3 +316,4 @@ RSpec.describe SolidusSubscriptions::OrderRenewal::Checkout do
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers

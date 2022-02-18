@@ -2,7 +2,7 @@ module Spree
   module Admin
     class SubscriptionsController < ResourceController
       skip_before_action :load_resource, only: :index
-      before_action :set_store_id, only: [:create]
+      before_action :set_store_id, only: [:create] # rubocop:disable Rails/LexicallyScopedActionFilter
 
       def index
         @search = SolidusSubscriptions::Subscription.order(:actionable_date).

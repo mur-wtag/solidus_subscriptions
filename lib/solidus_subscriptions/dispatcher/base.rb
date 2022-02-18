@@ -44,7 +44,7 @@ module SolidusSubscriptions
       end
 
       def message_code
-        @message_code ||= self.class.name.underscore.split('/').last.sub('_dispatcher','')
+        @message_code ||= self.class.name.underscore.split('/').last.sub('_dispatcher', '')
       end
 
       def subscription_failure_params

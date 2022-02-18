@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe Spree::OrdersController, type: :controller do
   routes { Spree::Core::Engine.routes }
 
@@ -75,3 +76,4 @@ RSpec.describe Spree::OrdersController, type: :controller do
     end
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers

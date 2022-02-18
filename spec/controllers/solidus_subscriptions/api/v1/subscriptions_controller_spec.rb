@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe SolidusSubscriptions::Api::V1::SubscriptionsController, type: :controller do
   routes { SolidusSubscriptions::Engine.routes }
 
@@ -101,3 +102,4 @@ RSpec.describe SolidusSubscriptions::Api::V1::SubscriptionsController, type: :co
     it_behaves_like "an authenticated subscription"
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers
