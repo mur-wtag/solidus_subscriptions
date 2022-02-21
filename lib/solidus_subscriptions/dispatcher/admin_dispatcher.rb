@@ -4,10 +4,7 @@ module SolidusSubscriptions
   module Dispatcher
     class AdminDispatcher < Base
       def dispatch
-        if order
-          order.touch :completed_at
-          order.cancel!
-        end
+        cancel_order
         installments.each { |i| i.failed!(order) }
         super
       end

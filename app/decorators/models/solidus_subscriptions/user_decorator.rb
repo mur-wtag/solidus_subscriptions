@@ -14,4 +14,3 @@ module SolidusSubscriptions
     ::Spree.user_class.prepend(self)
   end
 end
-

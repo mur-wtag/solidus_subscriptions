@@ -27,4 +27,3 @@ module SolidusSubscriptions
     ::Spree::OrdersController.prepend(self)
   end
 end
-

@@ -17,17 +17,32 @@ RSpec.describe SolidusSubscriptions::Subscription, type: :model do
 
   describe '#update_line_item_end_date' do
     let(:end_date) { 6.months.from_now }
-    let(:new_end_date) { 10.months.from_now }
     let(:subscription) do
       create :subscription, :with_line_item, end_date: end_date, line_item_traits: [{ end_date: end_date }]
     end
-    let(:line_item) { subscription.line_items.first }
 
-    it 'updates line_item end_dates when the subscription end_date changed' do
-      expect do
-        subscription.update(end_date: new_end_date)
-        line_item.reload
-      end.to change(line_item, :end_date).to(new_end_date.to_date)
+    shared_examples 'an updater of subscription.line_items end_dates' do
+      let(:line_item) { subscription.line_items.first }
+
+      it do
+        expect do
+          subscription.update(end_date: new_end_date)
+          line_item.reload
+        end.to change(line_item, :end_date).to(new_end_date&.to_date)
+      end
+    end
+
+    it_behaves_like 'an updater of subscription.line_items end_dates' do
+      let(:new_end_date) { 10.months.from_now }
+    end
+
+    it_behaves_like 'an updater of subscription.line_items end_dates' do
+      let(:new_end_date) { nil }
+    end
+
+    it 'is not called if end_date is not changed' do
+      expect(subscription).not_to receive(:update_line_item_end_date)
+      subscription.update(actionable_date: 1.month.from_now)
     end
   end
 

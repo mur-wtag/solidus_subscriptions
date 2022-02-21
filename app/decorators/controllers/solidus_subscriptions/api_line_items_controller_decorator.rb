@@ -26,4 +26,3 @@ module SolidusSubscriptions
     ::Spree::Api::LineItemsController.prepend(self)
   end
 end
-

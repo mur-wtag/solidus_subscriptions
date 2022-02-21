@@ -4,6 +4,8 @@ $:.push File.expand_path('lib', __dir__)
 require 'solidus_subscriptions/version'
 
 Gem::Specification.new do |s|
+  s.required_ruby_version = ['>= 2.5.0', '< 2.8.0']
+
   s.name        = 'solidus_subscriptions'
   s.version     = SolidusSubscriptions::VERSION
   s.summary     = 'Add subscription support to Solidus'

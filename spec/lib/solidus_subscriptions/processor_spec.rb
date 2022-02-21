@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# rubocop:disable RSpec/MultipleMemoizedHelpers
 RSpec.describe SolidusSubscriptions::Processor, :checkout do
   include ActiveJob::TestHelper
   around { |e| perform_enqueued_jobs { e.run } }
@@ -119,3 +120,4 @@ RSpec.describe SolidusSubscriptions::Processor, :checkout do
     it_behaves_like 'a subscription order'
   end
 end
+# rubocop:enable RSpec/MultipleMemoizedHelpers

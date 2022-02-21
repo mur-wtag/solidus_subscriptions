@@ -107,12 +107,11 @@ module SolidusSubscriptions
           end
         end
       end
-
     end
 
     private
 
-    def advance_actionable_date!(flag = true)
+    def advance_actionable_date!(flag = true) # rubocop:disable Style/OptionalBooleanParameter
       update!(actionable_date: flag ? next_actionable_date : nil)
     end
 

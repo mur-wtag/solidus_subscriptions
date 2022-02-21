@@ -46,7 +46,7 @@ module SolidusSubscriptions
           end
         rescue ::Spree::Order::InsufficientStock
           Config.out_of_stock_dispatcher_class.new(installments, order).dispatch
-        rescue
+        rescue # rubocop:disable Style/RescueStandardError
           Config.admin_dispatcher_class.new(installments, order).dispatch
         end
 
