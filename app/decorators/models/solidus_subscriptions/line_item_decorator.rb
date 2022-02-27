@@ -9,7 +9,7 @@ module SolidusSubscriptions
         class_name: 'SolidusSubscriptions::LineItem',
         foreign_key: :spree_line_item_id,
         inverse_of: :spree_line_item,
-        dependent: :destroy
+        dependent: :nullify
       )
 
       base.accepts_nested_attributes_for :subscription_line_items
