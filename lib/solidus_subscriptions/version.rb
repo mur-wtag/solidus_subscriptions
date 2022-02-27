@@ -1,3 +1,3 @@
 module SolidusSubscriptions
-  VERSION = '1.0.6.paragon'
+  VERSION = '1.0.7.paragon'
 end
