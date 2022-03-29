@@ -9,6 +9,13 @@ module SolidusSubscriptions
       )
 
       base.accepts_nested_attributes_for :subscriptions
+      base.after_save(:mark_dependent_subscriptions_canceled, if: -> { saved_change_to_deleted_at? && self.deleted_at.present? })
+    end
+
+    private
+
+    def mark_dependent_subscriptions_canceled
+      SolidusSubscriptions::Subscription.where(user_id: self.id).update_all(state: 'canceled')
     end
 
     ::Spree.user_class.prepend(self)
