@@ -18,7 +18,29 @@ RSpec.describe Spree::Admin::SubscriptionsController, type: :request do
       response
     end
 
+    let(:end_date) { 6.months.from_now }
+    let!(:subscription) do
+      create :subscription, :actionable, end_date: end_date, line_item_traits: [{ end_date: end_date }]
+    end
+
     it { is_expected.to be_successful }
+
+    it "assigns user's subscriptions" do
+      subject
+      expect(assigns(:subscriptions).count).to eq 1
+      expect(assigns(:subscriptions).last).to eq subscription
+    end
+
+    context 'with deleted user' do
+      before do
+        subscription.user.discard
+      end
+
+      it "does not assign deleted user's subscriptions" do
+        subject
+        expect(assigns(:subscriptions).count).to eq 0
+      end
+    end
   end
 
   describe 'GET :new' do

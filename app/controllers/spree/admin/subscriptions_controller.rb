@@ -8,10 +8,12 @@ module Spree
         @search = SolidusSubscriptions::Subscription.order(:actionable_date).
           accessible_by(current_ability, :index).ransack(params[:q])
 
-        @subscriptions = @search.result(distinct: true).
-          includes(:line_items, :user).
-          page(params[:page]).
-          per(params[:per_page] || Spree::Config[:orders_per_page])
+        @subscriptions = @search.result(distinct: true)
+                                .joins(:user)
+                                .includes(:line_items, :user)
+                                .where('spree_users.deleted_at IS NULL')
+                                .page(params[:page] || 1)
+                                .per(params[:per_page] || Spree::Config[:orders_per_page])
       end
 
       def new
