@@ -7,6 +7,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # otherwise it takes forever to resolve them.
 # See https://github.com/bundler/bundler/issues/6677
 gem 'rails', '~> 6.0.2.2'
+gem 'rails-controller-testing'
 
 # Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise'
