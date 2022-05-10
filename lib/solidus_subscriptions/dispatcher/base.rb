@@ -56,7 +56,7 @@ module SolidusSubscriptions
       end
 
       def cancel_order
-        return if order.blank? || !order.persisted?
+        return unless order&.persisted?
 
         order.touch :completed_at
         order.cancel
