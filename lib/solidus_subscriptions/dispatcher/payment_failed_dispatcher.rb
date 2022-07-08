@@ -5,6 +5,9 @@ module SolidusSubscriptions
   module Dispatcher
     class PaymentFailedDispatcher < Base
       def dispatch
+        # it's just a workaround for an edge-case (when payment method is deleted but subscription still is there)
+        order&.update_columns(state: :address)
+
         cancel_order
         installments.each { |i| i.payment_failed!(order) }
         super
